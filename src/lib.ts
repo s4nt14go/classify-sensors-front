@@ -1,7 +1,9 @@
+import {Severity} from "./components/Notification";
+
 async function uploadViaPresignedPost(api: string, file: any) {
 
-  if (!file) return `Please enter a file`;
-  if (!api) return `You should set the api url`;
+  if (!file) return {msg: `Please enter a file`, severity: Severity.INFO};
+  if (!api) return {msg: `You should set the api url`, severity: Severity.ERROR};
 
   // Get presigned POST URL and form fields
   let response = await fetch(api + 'signed-post');
@@ -14,10 +16,10 @@ async function uploadViaPresignedPost(api: string, file: any) {
 
   // Send the POST request
   response = await fetch(json.data.url, { method: 'POST', body: form });
-  if (!response.ok) return `Failed to upload via presigned POST:\n${JSON.stringify(response, null, 2)}`;
+  if (!response.ok) return {msg: `Failed to upload: ${JSON.stringify(response, null, 2)}`, severity: Severity.ERROR};
 
   // Done!
-  return `File uploaded via presigned POST with key: ${json.id}`;
+  return {msg: `File uploaded with key: ${json.id}`, severity: Severity.SUCCESS};
 }
 
 export {

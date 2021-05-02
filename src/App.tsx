@@ -1,19 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import './App.css';
 import Header from "./components/Header";
 import Dropzone from "./components/Dropzone";
 import {FileWithPath} from 'react-dropzone';
 import {uploadViaPresignedPost} from "./lib";
 import config from "./config";
+import Notification from "./components/Notification";
 
 function App() {
 
+  const NotificationRef = useRef<any>();
   const [ file, setFile ] = useState<FileWithPath>();
 
   async function upload() {
     const result = await uploadViaPresignedPost(config.SIGNER_URL, file);
     console.log('result', result);
-    alert(result);
+    NotificationRef.current.start(result.msg, result.severity);
   }
 
   return (
@@ -30,6 +32,8 @@ function App() {
         </button>
 
       </div>
+
+      <Notification ref={NotificationRef} />
     </div>
   );
 }
