@@ -1,0 +1,17 @@
+const configs = {
+  dev: {
+    SIGNER_URL: process.env.REACT_APP_dev_SIGNER_URL,
+  },
+  prod: {
+    SIGNER_URL: process.env.REACT_APP_prod_SIGNER_URL,
+  },
+};
+
+if (!process.env.REACT_APP_STAGE) throw Error('Set REACT_APP_STAGE environmental variable');
+if (!configs[process.env.REACT_APP_STAGE]) throw Error(`Config ${process.env.REACT_APP_STAGE} doesn't exist`);
+
+const exported = {
+  ...configs[process.env.REACT_APP_STAGE],
+}
+
+export default exported;
