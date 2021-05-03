@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Dropzone from "./components/Dropzone";
 import {uploadViaPresignedPost} from "./lib";
 import config from "./config";
-import Notification from "./components/Notification";
+import Notification, {Severity} from "./components/Notification";
 import {ulid} from "ulid";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import styles from "./App.module.css";
@@ -31,15 +31,25 @@ function App() {
   const [ results, setResults ] = useState<any>(null);
   async function checkResults() {
     console.log('checkResults');
-    let response = await fetch(config.API_URL + 'check-results?' +  new URLSearchParams({
-      sessionId,
-    }));
-    let json = await response.json();
-    console.log('results', json);
-    for (const i of json.Items) {
-      if (i.classification) i.classification = JSON.parse(i.classification);
+
+    try {
+      let response = await fetch(config.API_URL + 'check-results?' +  new URLSearchParams({
+        sessionId,
+      }));
+      let json = await response.json();
+      console.log('results', json);
+      if (json.error) {
+        return NotificationRef.current.start(json.error, Severity.ERROR);
+      }
+      for (const i of json.Items) {
+        if (i.classification) i.classification = JSON.parse(i.classification);
+      }
+      setResults(json.Items);
+      NotificationRef.current.start('Results retrieved successfully', Severity.SUCCESS);
+    } catch (e) {
+      console.log(e);
+      NotificationRef.current.start('Check results unsuccessful', Severity.ERROR);
     }
-    setResults(json.Items);
   }
 
   return (
