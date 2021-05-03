@@ -3,10 +3,10 @@ import {Severity} from "./components/Notification";
 async function uploadViaPresignedPost(api: string, file: any, sessionId: string) {
 
   try {
-    if (!file) return {msg: `Please enter a file`, severity: Severity.INFO};
+    if (!file) return {msg: `Please select a file`, severity: Severity.INFO};
     if (!api) return {msg: `You should set the api url`, severity: Severity.ERROR};
 
-    let response = await fetch(api + 'signed-post?' +  new URLSearchParams({
+    let response = await fetch(api + 'sign-post?' +  new URLSearchParams({
       sessionId,
       filename: file.name,
     }));
