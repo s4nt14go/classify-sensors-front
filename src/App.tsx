@@ -1,19 +1,25 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import './App.css';
 import Header from "./components/Header";
 import Dropzone from "./components/Dropzone";
-import {FileWithPath} from 'react-dropzone';
 import {uploadViaPresignedPost} from "./lib";
 import config from "./config";
 import Notification from "./components/Notification";
+import {ulid} from "ulid";
 
 function App() {
 
   const NotificationRef = useRef<any>();
-  const [ file, setFile ] = useState<FileWithPath>();
+  const [ file, setFile ] = useState<File>();
+  const [ sessionId, setSessionId ] = useState<any>();
+
+  useEffect(()=>{
+    setSessionId(ulid());
+  }, []);
 
   async function upload() {
-    const result = await uploadViaPresignedPost(config.SIGNER_URL, file);
+    console.log('upload', file)
+    const result = await uploadViaPresignedPost(config.SIGNER_URL, file, sessionId);
     console.log('result', result);
     NotificationRef.current.start(result.msg, result.severity);
   }

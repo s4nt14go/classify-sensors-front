@@ -1,16 +1,16 @@
 import React, {useState, useCallback} from 'react';
-import {useDropzone, FileWithPath} from 'react-dropzone';
+import {useDropzone} from 'react-dropzone';
 import {MdCloudUpload} from 'react-icons/md';
 
 type Props = {
-  setFile: (file: FileWithPath) => void,
+  setFile: (file: File) => void,
 };
 
 const Dropzone: React.FC<Props> = ({setFile}) => {
 
   const [filesToUpload, setFilesToUpload] = useState<any>();
   const onDrop = useCallback(acceptedFiles => {
-    acceptedFiles.forEach((file:FileWithPath) => {
+    acceptedFiles.forEach((file: File) => {
       const reader = new FileReader();
       reader.onabort = () => console.log('file reading was aborted')
       reader.onerror = () => console.log('file reading has failed')
@@ -18,9 +18,9 @@ const Dropzone: React.FC<Props> = ({setFile}) => {
         setFile(file);
         setFilesToUpload(<div className={`${!acceptedFiles.length? 'invisible' : ''}`}>
           <h4 className='inline mr-1.5 text-gray-500'>File:</h4>
-          {acceptedFiles.map((file: FileWithPath) => (
+          {acceptedFiles.map((file: File) => (
             <p className='inline' key={file.size}>
-              {file.path} - {file.size} bytes
+              {file.name} - {file.size} bytes
             </p>
           ))}</div>);
       }
