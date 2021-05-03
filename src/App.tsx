@@ -18,8 +18,8 @@ function App() {
   }, []);
 
   async function upload() {
-    console.log('upload', file)
-    const result = await uploadViaPresignedPost(config.SIGNER_URL, file, sessionId);
+    console.log('upload', file);
+    const result = await uploadViaPresignedPost(config.API_URL, file, sessionId);
     console.log('result', result);
     NotificationRef.current.start(result.msg, result.severity);
   }

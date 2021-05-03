@@ -1,9 +1,9 @@
 const configs = {
   dev: {
-    SIGNER_URL: process.env.REACT_APP_dev_SIGNER_URL,
+    API_URL: process.env.REACT_APP_dev_API_URL,
   },
   prod: {
-    SIGNER_URL: process.env.REACT_APP_prod_SIGNER_URL,
+    API_URL: process.env.REACT_APP_prod_API_URL,
   },
 };
 
