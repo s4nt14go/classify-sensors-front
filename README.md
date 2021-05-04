@@ -51,6 +51,11 @@ We have to process the file in order to classify each sensor, so for the above i
 </p>
 <br />
 
+### Techs used in this frontend
+* React, TypeScript
+* Tailwind CSS
+* CI/CD: Netlify
+
 # Backend
 
 In [this repo](https://github.com/s4nt14go/classify-sensors-back) you can take a look at the backend
