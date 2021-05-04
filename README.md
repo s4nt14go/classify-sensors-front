@@ -1,4 +1,7 @@
-# Description
+# Classify sensors
+<a href="https://github.com/s4nt14go/classify-sensors-front">
+  <img src="https://api.netlify.com/api/v1/badges/aa76785f-8ad4-4042-97b9-824b533c13da/deploy-status" />
+</a><br /><br />
 
 We have a fleet of vehicles equipped with sensors for `loudness`, `bumpiness`, and `happiness`. The vehicles upload a file with this format:
 
@@ -41,11 +44,11 @@ We have to process the file in order to classify each sensor, so for the above i
 
 # Demo
 
-[Click here](https://TODO) to check the demo!
+[Click here](https://prod--classify-sensors.netlify.app) to check the demo!
 
 <br />
 <p align="center">
-    <a href="https://TODO">
+    <a href="https://prod--classify-sensors.netlify.app">
         <img src="doc/screenshot.png" />
     </a>
 </p>
