@@ -10,12 +10,12 @@ async function uploadViaPresignedPost(api: string, file: any, sessionId: string)
       sessionId,
       filename: file.name,
     }));
-    console.log('response', response);
+    console.log('sign response', response);
     let json = await response.json();
+    console.log('sign json', json);
     if (json.error) {
       return {msg: json.error, severity: Severity.ERROR};
     }
-    console.log('signed post', json);
 
 
     // Build a form for the request body
@@ -25,7 +25,8 @@ async function uploadViaPresignedPost(api: string, file: any, sessionId: string)
 
     // Send the POST request
     response = await fetch(json.data.url, { method: 'POST', body: form });
-    if (!response.ok) return {msg: `Failed to upload: ${JSON.stringify(response, null, 2)}`, severity: Severity.ERROR};
+    console.log('post response', response);
+    if (!response.ok) return {msg: `Failed to upload: ${response.statusText}`, severity: Severity.ERROR};
 
     return {msg: `File uploaded with key: ${json.data.fields.key}`, severity: Severity.SUCCESS};
 
