@@ -1,5 +1,5 @@
 # Classify sensors
-<a href="https://github.com/s4nt14go/classify-sensors-front">
+<a href="https://app.netlify.com/sites/classify-sensors/deploys">
   <img src="https://api.netlify.com/api/v1/badges/aa76785f-8ad4-4042-97b9-824b533c13da/deploy-status" />
 </a><br /><br />
 
@@ -42,13 +42,15 @@ We have to process the file in order to classify each sensor, so for the above i
 }
 ```
 
+> You can use the file `exampleFile.log` to test the app
+
 # Demo
 
-[Click here](https://prod--classify-sensors.netlify.app) to check the demo!
+[Click here](https://classify-sensors.netlify.app) to check the demo!
 
 <br />
 <p align="center">
-    <a href="https://prod--classify-sensors.netlify.app">
+    <a href="https://classify-sensors.netlify.app">
         <img src="doc/screenshot.png" />
     </a>
 </p>
@@ -62,3 +64,33 @@ We have to process the file in order to classify each sensor, so for the above i
 # Backend
 
 In [this repo](https://github.com/s4nt14go/classify-sensors-back) you can take a look at the backend
+
+# Instructions
+
+1. After deploying the backend, you'll get the api url. So, to run React locally you'll have to set it through an environment variable. In the [config.js](src/config.js) we expect to work with `dev` and `prod` backend stages, as an example let's say we want to run the app against the `prod` stage, create an `.env` file with these env vars:
+
+    ```dotenv
+    REACT_APP_STAGE=prod
+    REACT_APP_prod_API_URL=https://<your backend prod data>.execute-api.<your region>.amazonaws.com/prod
+    ```
+
+1. Use Node 14 version, using [nvm](https://github.com/nvm-sh/nvm) you can:
+
+    ```
+    # set Node 14 in current terminal
+    nvm use 14
+    # set Node 14 as default (new terminals will use 14)
+    nvm alias default 14
+    ```
+
+1. Install dependencies
+
+    ```shell script
+    npm ci
+    ```
+
+1. Run locally
+
+    ```shell script
+    npm start
+    ```
