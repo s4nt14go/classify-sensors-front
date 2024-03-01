@@ -1,4 +1,4 @@
-# Classify sensors 
+# Classify sensors
 <a href="https://app.netlify.com/sites/classify-sensors/deploys">
   <img src="https://api.netlify.com/api/v1/badges/aa76785f-8ad4-4042-97b9-824b533c13da/deploy-status" />
 </a><br /><br />
